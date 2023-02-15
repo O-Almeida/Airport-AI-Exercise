@@ -1,0 +1,5 @@
+/**
+ * DB models.
+ */
+
+module.exports = {};
