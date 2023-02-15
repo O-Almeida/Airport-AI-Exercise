@@ -1,5 +1,6 @@
+import userModel from "./user/user.model";
+
 /**
  * DB models.
  */
-
-module.exports = {};
+module.exports = { userModel };

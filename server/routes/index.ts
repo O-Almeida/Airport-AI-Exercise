@@ -2,12 +2,10 @@
  * App routes definitions.
  */
 import { Router } from "express";
+import { AuthRoutes } from "./auth.routes";
 
 const router = Router();
 
-// To confirm setup only.
-router.use("/api/auth", function (req, res) {
-  return res.send("Hello world!");
-});
+router.use("/auth", new AuthRoutes().router);
 
 export default router;
