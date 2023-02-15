@@ -6,6 +6,9 @@ import jwt from "jsonwebtoken";
 import { AuthCredentialsDto } from "../dto/user/auth-credential.dto";
 import { AUTH_EXPIRE, AUTH_SECRET } from "../constants/auth.constants";
 
+/**
+ * Service that provides authenticatioin and user management functionality.
+ */
 export class AuthService {
   /**
    * Authenticates a user with the provided credentials and returns an access token if successful.
