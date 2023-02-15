@@ -5,6 +5,7 @@ import * as bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { AuthCredentialsDto } from "../dto/user/auth-credential.dto";
 import { AUTH_EXPIRE, AUTH_SECRET } from "../constants/auth.constants";
+import { CustomError } from "../models/error/custom-error.model";
 
 /**
  * Service that provides authenticatioin and user management functionality.
@@ -34,7 +35,7 @@ export class AuthService {
 
       return accessToken;
     } else {
-      throw new Error("Please check your login credentials.");
+      throw new CustomError("Please check your login credentials.", 401);
     }
   }
 
@@ -48,7 +49,7 @@ export class AuthService {
     const { username, password, role } = createUserDto;
 
     if (await this.findByUsername(username)) {
-      throw new Error("Username already in use.");
+      throw new CustomError("Username already in use.", 400, { username });
     }
     // Generates a hashed password usign salt method
     const hashedPassword = await bcrypt.hash(password, await bcrypt.genSalt());
