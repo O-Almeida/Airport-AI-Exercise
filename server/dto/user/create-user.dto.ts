@@ -6,7 +6,7 @@ import {
   MaxLength,
   MinLength,
 } from "class-validator";
-import { UserRoles } from "../models/user/user-roles.enum";
+import { UserRoles } from "../../models/user/user-roles.enum";
 
 /**
  * A Data Transfer Object representing the data needed to creat a new user.
