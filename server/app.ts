@@ -2,6 +2,7 @@
  * App entrypoint.
  */
 import route from "./routes/index";
+import bodyParser from "body-parser";
 
 const app = require("express")();
 
@@ -13,8 +14,11 @@ require("./setup/express");
 // Set up MongoDB.
 require("./setup/mongoose")();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 // Set up routes.
-app.use("/", route);
+app.use("/api", route);
 
 // Start app.
 app.listen(PORT, () => {
