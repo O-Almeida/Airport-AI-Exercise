@@ -1,5 +1,7 @@
+import { celebrate, errors } from "celebrate";
 import { Router } from "express";
 import { AuthController } from "../controllers/auth.controller";
+import { AuthJoi } from "../shared/validators/auth.validator";
 
 /**
  * Class representing authentication routes.
@@ -24,6 +26,7 @@ export class AuthRoutes {
     this.authController = new AuthController();
     this.router = Router();
     this.initializeRoutes();
+    this.router.use(errors());
   }
 
   /**
@@ -41,7 +44,11 @@ export class AuthRoutes {
      * @param {Object} res - Express response object.
      * @param {function} next - Express next middleware function.
      */
-    this.router.post("/register", this.authController.signUp);
+    this.router.post(
+      "/register",
+      celebrate({ body: AuthJoi }),
+      this.authController.signUp
+    );
     /**
      * Route for user login.
      * @name /login
@@ -52,6 +59,10 @@ export class AuthRoutes {
      * @param {Object} res - Express response object.
      * @param {function} next - Express next middleware function.
      */
-    this.router.post("/login", this.authController.signIn);
+    this.router.post(
+      "/login",
+      celebrate({ body: AuthJoi }),
+      this.authController.signIn
+    );
   }
 }
