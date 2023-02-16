@@ -3,6 +3,7 @@
  */
 import { Express } from "express";
 
+const morgan = require("morgan");
 const helmet = require("helmet");
 const methodOverride = require("method-override");
 const express = require("express");
@@ -13,6 +14,7 @@ const express = require("express");
  * @param {Object} app  The express app.
  */
 export default function setup(app: Express) {
+  app.use(morgan("combined"));
   app.use(helmet());
   app.use(methodOverride());
   app.use(express.urlencoded({ extended: true }));
