@@ -1,24 +1,26 @@
 /**
  * App entrypoint.
  */
+import express from "express";
 import route from "./routes/index";
-import bodyParser from "body-parser";
+import setupExpress from "./setup/express";
+import handleError from "./shared/middleware/error-handler.middleware";
 
-const app = require("express")();
+const app = express();
 
 const PORT = 3000;
 
-// Set up Express.
-require("./setup/express");
+//Set up Express
+setupExpress(app);
 
 // Set up MongoDB.
 require("./setup/mongoose")();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 // Set up routes.
 app.use("/api", route);
+
+// Global handler
+app.use(handleError);
 
 // Start app.
 app.listen(PORT, () => {
