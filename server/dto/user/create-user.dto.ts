@@ -19,6 +19,7 @@ import { UserRoles } from "../../models/user/user-roles.enum";
  */
 export class CreateUserDto {
   @IsString()
+  @MinLength(3)
   @MaxLength(20)
   username: string;
 
